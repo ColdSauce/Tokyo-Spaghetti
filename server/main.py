@@ -3,9 +3,9 @@ from thread import *
 
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #host_name = socket.gethostname()
-    host_name = ''
+    host_name = socket.gethostname()
     host_port = 4248
+    print "ip: {} port: {}".format('no lolzard', host_port)
     server.bind((host_name, host_port))
     server.listen(5)
     conn, addr = server.accept()

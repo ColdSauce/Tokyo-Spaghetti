@@ -23,8 +23,8 @@ def send_music(s):
     # Amazing UX -- the only way to stop is to ctrl-c :p
     while 1:
         data_from_stream = stream.read(chunk_size)
-        print data_from_stream
-        #s.send(str(data_from_stream))
+        #print data_from_stream
+        s.send(str(data_from_stream))
 
 def is_ip_address_valid(ip):
     try:
@@ -62,4 +62,4 @@ def main():
     send_music(s)
 
 if __name__ == '__main__':
-    other_main()
+    main()
