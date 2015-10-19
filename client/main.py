@@ -1,3 +1,4 @@
+import socket
 import pyaudio
 import sys
 
@@ -22,19 +23,19 @@ def send_music(s):
     # Amazing UX -- the only way to stop is to ctrl-c :p
     while 1:
         data_from_stream = stream.read(chunk_size)
-        print data_from_stream
+#        print data_from_stream
         s.send(str(data_from_stream))
 
 def is_ip_address_valid(ip):
     try:
-        socket.inet_atonn(address)
+        socket.inet_aton(ip)
     except socket.error:
         return False
     else:
         return True
 
 def is_port_valid(port):
-    return 1 < port and port < 65535
+    return 1 < port or port < 65535
 
 def main():
     print "Howdy, partner! Welcome to Tokyo Spaghetti."
@@ -54,7 +55,7 @@ def main():
     print "Connecting to the server."
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((ip,port))
+    s.connect((ip,int(port)))
     send_music(s)
 
 if __name__ == '__main__':
