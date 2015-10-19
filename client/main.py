@@ -7,7 +7,7 @@ def send_music(s):
     # So many caps..
     ONE_KILOBYTE= 1024
     chunk_size = ONE_KILOBYTE
-    FORMAT = pyaudio.paInt16
+    FORMAT = pyaudio.paUInt8
     CHANNELS = 1
     RATE = 44100
     audi = pyaudio.PyAudio()
@@ -23,8 +23,8 @@ def send_music(s):
     # Amazing UX -- the only way to stop is to ctrl-c :p
     while 1:
         data_from_stream = stream.read(chunk_size)
-#        print data_from_stream
-        s.send(str(data_from_stream))
+        print data_from_stream
+        #s.send(str(data_from_stream))
 
 def is_ip_address_valid(ip):
     try:
@@ -36,6 +36,9 @@ def is_ip_address_valid(ip):
 
 def is_port_valid(port):
     return 1 < port or port < 65535
+
+def other_main():
+    send_music("")
 
 def main():
     print "Howdy, partner! Welcome to Tokyo Spaghetti."
@@ -59,4 +62,4 @@ def main():
     send_music(s)
 
 if __name__ == '__main__':
-    main()
+    other_main()
