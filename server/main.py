@@ -3,7 +3,7 @@ from thread import *
 
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    host_name = socket.gethostname()
+    host_name = '0.0.0.0' 
     host_port = 4248
     print "ip: {} port: {}".format('no lolzard', host_port)
     server.bind((host_name, host_port))
