@@ -5,7 +5,7 @@ import sys
 
 def send_music(s):
     # So many caps..
-    ONE_KILOBYTE= 1024
+    ONE_KILOBYTE=1024
     chunk_size = ONE_KILOBYTE
     FORMAT = pyaudio.paUInt8
     CHANNELS = 1 
@@ -32,9 +32,10 @@ def send_music(s):
         #data_from_stream = data_from_stream + stream.read(chunk_size)
         #print str(bytes_read)
         
+        print str(data_from_stream)
+        #s.send(str(data_from_stream))
         
         data_from_stream = ""
-        s.send(str(data_from_stream))
 
 def is_ip_address_valid(ip):
     try:
@@ -72,4 +73,4 @@ def main():
     send_music(s)
 
 if __name__ == '__main__':
-    main()
+    other_main()
