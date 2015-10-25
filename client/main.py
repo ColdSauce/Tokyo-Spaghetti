@@ -8,22 +8,32 @@ def send_music(s):
     ONE_KILOBYTE= 1024
     chunk_size = ONE_KILOBYTE
     FORMAT = pyaudio.paUInt8
-    CHANNELS = 1
+    CHANNELS = 1 
     RATE = 44100
     audi = pyaudio.PyAudio()
     stream = audi.open(format = FORMAT,
               channels=CHANNELS,
               rate=RATE,
-              input=True,
-              frames_per_buffer=chunk_size)
+              frames_per_buffer=chunk_size,
+              input=True
+              )
     channel_map = (0,1)
     if s is None:
         print "stop what r u doing"
         raise Exception('Socket was None')
     # Amazing UX -- the only way to stop is to ctrl-c :p
+    data_from_stream = ''
     while 1:
-        data_from_stream = stream.read(chunk_size)
-        #print data_from_stream
+        bytes_read = 0
+        while bytes_read < ONE_KILOBYTE:
+            data_from_stream = data_from_stream + stream.read(chunk_size)
+            bytes_read = bytes_read + 1
+        #bytes_read = bytes_read + 1
+        #data_from_stream = data_from_stream + stream.read(chunk_size)
+        #print str(bytes_read)
+        
+        
+        data_from_stream = ""
         s.send(str(data_from_stream))
 
 def is_ip_address_valid(ip):

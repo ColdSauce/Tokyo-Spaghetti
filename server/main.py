@@ -9,16 +9,22 @@ def main():
     server.bind((host_name, host_port))
     server.listen(5)
     conn, addr = server.accept()
-    while 1:
-        data = conn.recv(1024)
-        if data:
-            print data
+    start_new_thread(music_thread)
         
 def music_thread(conn):
     conn.send("You are now connected! Feel free to play some music!")
+    
     while 1:
-        data = conn.recv(1024)
-        print data
+        MSGLEN = 1024
+        chunks = ''
+        bytes_recd = 0
+        while bytes_recd < MSGLEN:
+            chunk = conn.recv(min(MSGLEN - bytes_recd, 2048))
+            if chunk == '':
+                raise RuntimeError("Socket broken")
+            chunks += chunk
+            bytes_recd = bytes_recd + len(chunk)
+        print chunks
     conn.close()
 
 if __name__ == '__main__':
